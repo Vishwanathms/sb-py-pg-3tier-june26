@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spring Boot → Python App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        button { padding: 0.6rem 1rem; font-size: 1rem; }
+        #status { margin-top: 1rem; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>Spring Boot Frontend</h1>
+    <p>This page tests connectivity from Spring Boot to the Python container named <strong>pythonapp</strong>.</p>
+    <button onclick="connectToPython()">Connect to pythonapp</button>
+    <div id="status">Click the button to test the backend connection.</div>
+
+    <script>
+        async function connectToPython() {
+            const status = document.getElementById('status');
+            status.textContent = 'Connecting...';
+            try {
+                const response = await fetch('/api/python');
+                const text = await response.text();
+                status.textContent = text;
+            } catch (error) {
+                status.textContent = 'Fetch error: ' + error;
+            }
+        }
+    </script>
+</body>
+</html>

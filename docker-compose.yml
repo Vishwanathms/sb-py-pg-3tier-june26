@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  pythonapp:
+    container_name: pythonapp
+    build:
+      context: ./pythonapp
+    ports:
+      - "8080:8080"
+
+  springboot:
+    build:
+      context: ./springboot
+    ports:
+      - "8081:8081"
+    depends_on:
+      - pythonapp
