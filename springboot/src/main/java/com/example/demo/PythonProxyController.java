@@ -11,7 +11,7 @@ public class PythonProxyController {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${python.service.url:http://pythonapp:8000}")
+    @Value("${python.service.url:http://pythonapp:8080}")
     private String pythonServiceUrl;
 
     @GetMapping("/api/python")
