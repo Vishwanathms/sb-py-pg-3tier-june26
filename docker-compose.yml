@@ -7,6 +7,26 @@ services:
       context: ./pythonapp
     ports:
       - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: demo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  db:
+    image: postgres:15
+    container_name: postgresdb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: demo
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   springboot:
     build:
@@ -15,3 +35,8 @@ services:
       - "8081:8081"
     depends_on:
       - pythonapp
+
+volumes:
+  pgdata:
+    external: true
+    name: sb_py_pg_data
